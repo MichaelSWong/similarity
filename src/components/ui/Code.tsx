@@ -1,9 +1,10 @@
 'use client'
+
 import { useTheme } from 'next-themes'
 import Highlight, { defaultProps, type Language } from 'prism-react-renderer'
-import { useState, useEffect } from 'react'
 import darkTheme from 'prism-react-renderer/themes/nightOwl'
 import lightTheme from 'prism-react-renderer/themes/nightOwlLight'
+import { FC, useEffect, useState } from 'react'
 
 interface CodeProps {
   code: string
@@ -13,15 +14,15 @@ interface CodeProps {
   animated?: boolean
 }
 
-const Code = ({
+const Code: FC<CodeProps> = ({
   code,
-  language,
   show,
-  animationDelay,
   animated,
-}: CodeProps) => {
+  animationDelay,
+  language,
+}) => {
   const { theme: applicationTheme } = useTheme()
-  const [text, setText] = useState(animated ? '' : code)
+  const [text, setText] = useState<string>(animated ? '' : code)
 
   useEffect(() => {
     if (show && animated) {
@@ -66,7 +67,7 @@ const Code = ({
                 {line.map((token, index) => {
                   // eslint-disable-next-line no-unused-vars
                   const { key, ...props } = getTokenProps({ token, i })
-                  return <span key={index} {...props}></span>
+                  return <span key={index} {...props} />
                 })}
               </div>
             )

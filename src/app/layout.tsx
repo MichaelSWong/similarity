@@ -1,9 +1,10 @@
+import Navbar from '@/components/Navbar'
+import { Toaster } from '@/components/ui/Toast'
 import '@/styles/globals.css'
 import { Inter } from 'next/font/google'
-import { cn } from '@/lib/utils'
+
 import Providers from '@/components/Providers'
-import Navbar from '@/components/Navbar'
-import { Toaster } from '@/ui/Toast'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,9 +23,11 @@ export default function RootLayout({
           {/* @ts-expect-error Server Component */}
           <Navbar />
           <Toaster position='bottom-right' />
+
+          <main>{children}</main>
         </Providers>
-        <main>{children}</main>
-        {/* Allow for more height on mobile devices */}
+
+        {/* Allow more height for mobile menu on mobile */}
         <div className='h-40 md:hidden' />
       </body>
     </html>
