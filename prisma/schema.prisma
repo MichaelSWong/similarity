@@ -73,7 +73,7 @@ model ApiRequest {
   status    Int
   duration  Int
   
-  useApiKey String
+  usedApiKey String
 
   ApiKey    ApiKey      @relation(fields: [apiKeyId], references: [id])
   apiKeyId  String

@@ -4,8 +4,9 @@ import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { getServerSession } from 'next-auth'
 import LargeHeading from '@/ui/LargeHeading'
-import Paragraph from './ui/Paragraph'
-import { Input } from './ui/Input'
+import Paragraph from '@/ui/Paragraph'
+import { Input } from '@/ui/Input'
+import Table from '@/ui/Table'
 
 const ApiDashboard = async () => {
   const user = await getServerSession(authOptions)
@@ -42,6 +43,8 @@ const ApiDashboard = async () => {
       <Paragraph className='text-center md:text-left mt-4 -mb-4'>
         Your API history:
       </Paragraph>
+
+      <Table userRequests={serializableRequests} />
     </div>
   )
 }
