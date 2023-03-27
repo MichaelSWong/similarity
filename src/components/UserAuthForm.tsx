@@ -1,13 +1,16 @@
 'use client'
 
-import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { Button } from '@/ui/Button'
 import { signIn } from 'next-auth/react'
+import * as React from 'react'
+import { FC } from 'react'
+import { Button } from './ui/Button'
 import { toast } from './ui/Toast'
 
-const UserAuthForm = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   const loginWithGoogle = async () => {
     setIsLoading(true)
@@ -17,7 +20,7 @@ const UserAuthForm = () => {
     } catch (error) {
       toast({
         title: 'Error',
-        message: 'There was an error login in',
+        message: 'There was an error logging in with Google',
         type: 'error',
       })
     } finally {
@@ -26,9 +29,14 @@ const UserAuthForm = () => {
   }
 
   return (
-    <div className={cn('flex justify-center')}>
-      UseAuthForm
-      <Button isLoading className='max-w-sm w-full' onClick={loginWithGoogle}>
+    <div className={cn('flex justify-center', className)} {...props}>
+      <Button
+        isLoading={isLoading}
+        type='button'
+        className='max-w-sm w-full bg-slate-200'
+        onClick={loginWithGoogle}
+        disabled={isLoading}
+      >
         {isLoading ? null : (
           <svg
             className='mr-2 h-4 w-4'
